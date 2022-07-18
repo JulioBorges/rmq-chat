@@ -1,0 +1,75 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+@using Microsoft.AspNetCore.Identity
+@using RmqChat.UI.Configuration
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@inject AppConfiguration AppConfiguration;
+
+<div class="text-center">
+    <h1 class="display-4">Welcome to Rmq Chat</h1>
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <div class="page-content page-container" id="page-content">
+          <div class="padding">
+            <div class="row container d-flex justify-content-center">
+              <div class="col-md-8">
+                <div class="card card-bordered">
+                  <div
+                    class="ps-container ps-theme-default ps-active-y"
+                    id="chat-content"
+                    style="overflow-y: scroll !important; height: 400px !important"
+                  >
+                    <div class="ps-scrollbar-x-rail" style="left: 0px; bottom: 0px">
+                      <div
+                        class="ps-scrollbar-x"
+                        tabindex="0"
+                        style="left: 0px; width: 0px"
+                      ></div>
+                    </div>
+                    <div
+                      class="ps-scrollbar-y-rail"
+                      style="top: 0px; height: 0px; right: 2px"
+                    >
+                      <div
+                        class="ps-scrollbar-y"
+                        tabindex="0"
+                        style="top: 0px; height: 2px"
+                      ></div>
+                    </div>
+                  </div>
+
+                  <div class="publisher bt-1 border-light">
+                    <img
+                      class="avatar avatar-xs"
+                      src="~/assets/people.png"
+                      alt="..."
+                    />
+                    <input
+                      class="publisher-input"
+                      type="text"
+                      id="message"
+                      placeholder="Write something"
+                    />
+                    <button class="publisher-btn text-info" id="sendMessage" data-abc="true">
+                        <i class="fa fa-paper-plane"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        @Html.Hidden("sender", User?.Identity?.Name);
+        @Html.Hidden("urlWebSocket", AppConfiguration.WebSocketAddress);
+    }
+    else
+    {
+        <div>
+            <h2>Pleas login into Application to use chat.</h2>
+        </div>
+    }
+</div>

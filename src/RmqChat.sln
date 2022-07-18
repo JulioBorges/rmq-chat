@@ -1,0 +1,58 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32630.192
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RmqChat.Protocol", "RmqChat.Protocol\RmqChat.Protocol.csproj", "{6C031E39-86FC-482C-96F9-896AD7EF45EC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RmqChat.Data", "RmqChat.Data\RmqChat.Data.csproj", "{0FA10099-F611-4CB4-ADF1-37465CED1DCE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RmqChat.Server", "RmqChat.Server\RmqChat.Server.csproj", "{BA26448A-5531-4D68-B658-F3080B748561}"
+	ProjectSection(ProjectDependencies) = postProject
+		{0FA10099-F611-4CB4-ADF1-37465CED1DCE} = {0FA10099-F611-4CB4-ADF1-37465CED1DCE}
+		{6C031E39-86FC-482C-96F9-896AD7EF45EC} = {6C031E39-86FC-482C-96F9-896AD7EF45EC}
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RmqChat.UI", "RmqChat.UI\RmqChat.UI.csproj", "{88FDAE90-2C70-48AA-A508-A44D750CA9E6}"
+	ProjectSection(ProjectDependencies) = postProject
+		{0FA10099-F611-4CB4-ADF1-37465CED1DCE} = {0FA10099-F611-4CB4-ADF1-37465CED1DCE}
+		{6C031E39-86FC-482C-96F9-896AD7EF45EC} = {6C031E39-86FC-482C-96F9-896AD7EF45EC}
+		{BA26448A-5531-4D68-B658-F3080B748561} = {BA26448A-5531-4D68-B658-F3080B748561}
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{4E2B8A6A-6421-484A-B10B-CA59FB435A22}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6C031E39-86FC-482C-96F9-896AD7EF45EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C031E39-86FC-482C-96F9-896AD7EF45EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C031E39-86FC-482C-96F9-896AD7EF45EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C031E39-86FC-482C-96F9-896AD7EF45EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0FA10099-F611-4CB4-ADF1-37465CED1DCE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0FA10099-F611-4CB4-ADF1-37465CED1DCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0FA10099-F611-4CB4-ADF1-37465CED1DCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0FA10099-F611-4CB4-ADF1-37465CED1DCE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA26448A-5531-4D68-B658-F3080B748561}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA26448A-5531-4D68-B658-F3080B748561}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA26448A-5531-4D68-B658-F3080B748561}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA26448A-5531-4D68-B658-F3080B748561}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88FDAE90-2C70-48AA-A508-A44D750CA9E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88FDAE90-2C70-48AA-A508-A44D750CA9E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88FDAE90-2C70-48AA-A508-A44D750CA9E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88FDAE90-2C70-48AA-A508-A44D750CA9E6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{6C031E39-86FC-482C-96F9-896AD7EF45EC} = {4E2B8A6A-6421-484A-B10B-CA59FB435A22}
+		{0FA10099-F611-4CB4-ADF1-37465CED1DCE} = {4E2B8A6A-6421-484A-B10B-CA59FB435A22}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {327AC08F-923D-43BE-987D-9FE8C02021F4}
+	EndGlobalSection
+EndGlobal
