@@ -23,14 +23,22 @@ namespace RmqChat.Server.Helpers
         }
 
         public static IModel RegisterConsumerOnTopic<TConsumer>(this IModel channel, 
-            TConsumer consumer)
+            TConsumer consumer, int? maxLength = null)
             where TConsumer : BaseRmqConsumer
         {
             var queueName = channel.QueueDeclare().QueueName;
 
+            var arguments = new Dictionary<string, object>();
+
+            if (maxLength != null)
+            {
+                arguments.Add("x-max-length", maxLength);
+            }
+
             channel.QueueBind(queue: queueName,
                                   exchange: exchangeName,
-                                  routingKey: consumer.RoutingKey);
+                                  routingKey: consumer.RoutingKey,
+                                  arguments: arguments);
 
             channel.BasicConsume(queue: queueName,
                                  autoAck: true,

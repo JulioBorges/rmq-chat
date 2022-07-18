@@ -53,7 +53,7 @@ app.UseEndpoints(endpoints =>
     endpoints.MapHub<RmqChatHub>("/rmqchathub");
 });
 
-_channel.RegisterConsumerOnTopic(app.Services.GetService<MessageConsumer>()!);
+_channel.RegisterConsumerOnTopic(app.Services.GetService<MessageConsumer>()!, 50);
 _channel.RegisterConsumerOnTopic(app.Services.GetService<CommandConsumer>()!);
 
 await app.RunAsync();
