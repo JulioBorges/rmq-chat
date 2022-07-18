@@ -5,11 +5,18 @@ let connected = false;
 $("#sendMessage").prop('disabled', true);
 
 connection.on("ReceiveMessage", function (sender, message) {
+    console.log("CHEGOU !!!!");
+    debugger;
     let user = $("#sender").val();
     let messagesContainer = $("#chat-content");
 
     let divMessage = document.createElement("div");
-    let msg = message.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    let msg = message;
+
+    try {
+        msg = message.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    } catch { }
+
     divMessage.classList.add("media");
     divMessage.classList.add("media-chat");
 
@@ -48,16 +55,24 @@ connection.start().then(function () {
     return console.error(err.toString());
 });
 
+function sendMessage(event) {
+  let sender = $("#sender").val();
+  let message = $("#message").val();
 
-$("#sendMessage").click(function () {
-
-    let sender = $("#sender").val();
-    let message = $("#message").val();
+  if (message) {
     connection.invoke("ProcessMessage", sender, message).catch(function (err) {
-        return console.error(err.toString());
+      return console.error(err.toString());
     });
 
     $("#message").val('');
     $("#message").focus();
     event.preventDefault();
+  }
+}
+$("#sendMessage").click(sendMessage);
+
+$("#message").on("keydown", function search(e) {
+    if (e.keyCode == 13) {
+        sendMessage(e);
+    }
 });

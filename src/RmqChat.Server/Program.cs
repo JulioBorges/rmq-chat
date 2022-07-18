@@ -21,7 +21,7 @@ builder.Services.AddSingleton(serverConfig);
 builder.Services.AddSignalR();
 builder.Services.AddCors();
 
-using var connection = MessageBrokerHelper.GetConnection(serverConfig.MessagingHostName);
+using var connection = MessageBrokerHelper.GetConnection(serverConfig.MessagingHostName!);
 using var _channel = MessageBrokerHelper.InstantiateExchangeAndTopic(connection);
 builder.Services.AddSingleton(_channel);
 

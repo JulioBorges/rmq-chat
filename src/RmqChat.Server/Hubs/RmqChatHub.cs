@@ -21,7 +21,7 @@ namespace RmqChat.UI.Hubs
 
         public Task ProcessMessage(string user, string message)
         {
-            new MessageProcessor(_serverConfiguration.MessagingHostName!).ProcessMessage(user, message);
+            new MessagingProcessor(_serverConfiguration.MessagingHostName!).ProcessMessage(user, message);
             return Task.CompletedTask;
         }
 

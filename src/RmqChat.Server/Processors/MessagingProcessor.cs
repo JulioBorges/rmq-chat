@@ -4,11 +4,11 @@ using RmqChat.Server.Helpers;
 
 namespace RmqChat.Server.Processors
 {
-    public class MessageProcessor
+    public class MessagingProcessor
     {
         private readonly string _messagingHostName;
 
-        public MessageProcessor(string messagingHostName)
+        public MessagingProcessor(string messagingHostName)
         {
             _messagingHostName = messagingHostName;
         }
@@ -17,8 +17,18 @@ namespace RmqChat.Server.Processors
         {
             if (message.StartsWith("/"))
             {
-                var command = BuildCommand(user, message);
-                MessageBrokerHelper.SendCommandToBroker(_messagingHostName, command);
+                try
+                {
+                    var command = BuildCommand(user, message);
+                    MessageBrokerHelper.SendCommandToBroker(_messagingHostName, command);
+                }
+                catch
+                {
+                    var msg = BuildMessage("RmqChat", $"Command [{message}] invalid !");
+                    msg.To = user;
+
+                    MessageBrokerHelper.SendMessageToBroker(_messagingHostName, msg);
+                }
             }
             else
             {
@@ -32,7 +42,7 @@ namespace RmqChat.Server.Processors
             {
                 From = user,
                 CommandText = message.Split('=')[0],
-                ComandArgs = message.Split('=')[1]
+                CommandArgs = message.Split('=')[1]
             };
 
         private static Message BuildMessage(string user, string message) =>

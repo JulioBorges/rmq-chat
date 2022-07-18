@@ -21,8 +21,18 @@ namespace RmqChat.Server.Consumers
         {
             Message message = args.Body.ToArray().DeserializeData<Message>()!;
 
-            await _hubContext.Clients.All
-                .SendAsync("ReceiveMessage", message?.From, message?.Resource.ToString());
+            if (message == null)
+                return;
+
+            if (string.IsNullOrEmpty(message.To))
+            {
+                await _hubContext.Clients.All
+                    .SendAsync("ReceiveMessage", message.From, message.Resource.ToString());
+            }
+            else
+            {
+                await _hubContext.Clients.Group(message.To).SendAsync("ReceiveMessage", message.From, message.Resource.ToString());
+            }
         }
     }
 }
