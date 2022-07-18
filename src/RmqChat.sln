@@ -22,6 +22,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RmqChat.UI", "RmqChat.UI\Rm
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{4E2B8A6A-6421-484A-B10B-CA59FB435A22}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RmqChat.Interpreters", "RmqChat.Commands\RmqChat.Interpreters.csproj", "{5C848FFE-3B03-4ED8-B4D1-C5B8DF24827B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,6 +46,10 @@ Global
 		{88FDAE90-2C70-48AA-A508-A44D750CA9E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{88FDAE90-2C70-48AA-A508-A44D750CA9E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{88FDAE90-2C70-48AA-A508-A44D750CA9E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C848FFE-3B03-4ED8-B4D1-C5B8DF24827B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C848FFE-3B03-4ED8-B4D1-C5B8DF24827B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C848FFE-3B03-4ED8-B4D1-C5B8DF24827B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C848FFE-3B03-4ED8-B4D1-C5B8DF24827B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

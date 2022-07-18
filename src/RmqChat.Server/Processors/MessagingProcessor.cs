@@ -1,16 +1,18 @@
 ﻿using Microsoft.AspNetCore.SignalR;
+using RmqChat.Interpreters;
 using RmqChat.Protocol.Messaging;
+using RmqChat.Server.Configuration;
 using RmqChat.Server.Helpers;
 
 namespace RmqChat.Server.Processors
 {
     public class MessagingProcessor
     {
-        private readonly string _messagingHostName;
+        private readonly ServerConfiguration _serverConfiguration;
 
-        public MessagingProcessor(string messagingHostName)
+        public MessagingProcessor(ServerConfiguration serverConfiguration)
         {
-            _messagingHostName = messagingHostName;
+            _serverConfiguration = serverConfiguration;
         }
 
         public void ProcessMessage(string user, string message)
@@ -20,20 +22,20 @@ namespace RmqChat.Server.Processors
                 try
                 {
                     var command = BuildCommand(user, message);
-                    MessageBrokerHelper.SendCommandToBroker(_messagingHostName, command);
+                    MessageBrokerHelper.SendCommandToBroker(_serverConfiguration.MessagingHostName, command);
                 }
                 catch
                 {
-                    var msg = BuildMessage("RmqChat", $"Command [{message}] invalid !");
+                    var msg = BuildMessage(InterpreterServiceLocator.BotName, $"Command [{message}] invalid !");
                     msg.To = user;
 
-                    MessageBrokerHelper.SendMessageToBroker(_messagingHostName, msg);
+                    MessageBrokerHelper.SendMessageToBroker(_serverConfiguration.MessagingHostName, msg);
                 }
             }
             else
             {
                 var msg = BuildMessage(user, message);
-                MessageBrokerHelper.SendMessageToBroker(_messagingHostName, msg);
+                MessageBrokerHelper.SendMessageToBroker(_serverConfiguration.MessagingHostName, msg);
             }
         }
 

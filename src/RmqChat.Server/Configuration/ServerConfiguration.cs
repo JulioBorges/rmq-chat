@@ -2,6 +2,6 @@
 {
     public class ServerConfiguration
     {
-        public string? MessagingHostName { get; set; }
+        public string MessagingHostName { get; set; }
     }
 }

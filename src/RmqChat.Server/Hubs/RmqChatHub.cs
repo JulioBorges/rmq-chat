@@ -6,11 +6,11 @@ namespace RmqChat.UI.Hubs
 {
     public class RmqChatHub : Hub
     {
-        private readonly ServerConfiguration _serverConfiguration;
+        private readonly MessagingProcessor _messagingProcessor;
 
-        public RmqChatHub(ServerConfiguration serverConfiguration)
+        public RmqChatHub(MessagingProcessor messagingProcessor)
         {
-            _serverConfiguration = serverConfiguration;
+            _messagingProcessor = messagingProcessor;
         }
 
         public async Task ConnectUser(string user)
@@ -21,7 +21,7 @@ namespace RmqChat.UI.Hubs
 
         public Task ProcessMessage(string user, string message)
         {
-            new MessagingProcessor(_serverConfiguration.MessagingHostName!).ProcessMessage(user, message);
+            _messagingProcessor.ProcessMessage(user, message);
             return Task.CompletedTask;
         }
 

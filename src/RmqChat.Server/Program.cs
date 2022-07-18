@@ -4,6 +4,7 @@ using RmqChat.Data;
 using RmqChat.Server.Configuration;
 using RmqChat.Server.Consumers;
 using RmqChat.Server.Helpers;
+using RmqChat.Server.Processors;
 using RmqChat.UI.Hubs;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -24,7 +25,7 @@ builder.Services.AddCors();
 using var connection = MessageBrokerHelper.GetConnection(serverConfig.MessagingHostName!);
 using var _channel = MessageBrokerHelper.InstantiateExchangeAndTopic(connection);
 builder.Services.AddSingleton(_channel);
-
+builder.Services.AddSingleton<MessagingProcessor>();
 builder.Services.AddSingleton<MessageConsumer>();
 builder.Services.AddSingleton<CommandConsumer>();
 
@@ -53,7 +54,9 @@ app.UseEndpoints(endpoints =>
     endpoints.MapHub<RmqChatHub>("/rmqchathub");
 });
 
-_channel.RegisterConsumerOnTopic(app.Services.GetService<MessageConsumer>()!, 50);
-_channel.RegisterConsumerOnTopic(app.Services.GetService<CommandConsumer>()!);
+_channel
+    .RegisterConsumerOnTopic(app.Services.GetService<MessageConsumer>()!, 50)
+    .RegisterConsumerOnTopic(app.Services.GetService<CommandConsumer>()!)
+    .RegisterLogQueueOnTopic();
 
 await app.RunAsync();

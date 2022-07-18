@@ -46,6 +46,18 @@ namespace RmqChat.Server.Helpers
             return channel;
         }
 
+        public static IModel RegisterLogQueueOnTopic(this IModel channel)
+        {
+            var queueName = channel.QueueDeclare(queue: "message_logs",
+                durable: true, exclusive: false, autoDelete: false).QueueName;
+
+            channel.QueueBind(queue: queueName,
+                exchange: exchangeName,
+                routingKey: "message");
+            return channel;
+        }
+
+
         public static IModel SendDataToExchange<T>(this IModel channel, T data, string routingKey)
             where T: class
         {
